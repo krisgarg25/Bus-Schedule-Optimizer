@@ -44,8 +44,6 @@ Input: schedule.csv (routes, stops, times, demand per OD pair)
 Output: plan.txt (human-readable per-bus actions)
 plan.csv (structured data for dispatch systems)
 
-text
-
 ---
 
 ## 🚀 Quick Start
@@ -58,8 +56,6 @@ cd bus-schedule-optimizer
 
 No external dependencies needed—uses only Python stdlib!
 python optimize.py --schedule schedule.csv
-
-text
 
 ### Requirements
 
@@ -79,8 +75,6 @@ R1,R1-0815-A,CHD|RJP,35,08:15,1,20,CHD:RJP:20
 R2,R2-0830-A,CHD|RJP|PAT,35|50,08:30,1,80,CHD:RJP:45|CHD:PAT:35
 R1,R1-1400-A,CHD|RJP,35,14:00,1,7,CHD:RJP:7
 R2,R2-1415-A,CHD|RJP|PAT,35|50,14:15,1,85,CHD:RJP:50|CHD:PAT:35
-
-text
 
 #### Column Definitions
 
@@ -115,8 +109,6 @@ R2-1415-A 14:15 -> 14:15 Keep 0 1
 R2-1900-A 19:00 -> 19:00 Keep 2 1
 R2-1900-B, R2-1900-C 19:00 -> 19:00 Add 2 1
 
-text
-
 ### plan.csv (Machine-Readable)
 
 route_id,original_time,adjusted_time,baseline_buses,net_bus_change,trip_ids_kept,trip_ids_dropped,trip_ids_added
@@ -125,8 +117,6 @@ R1,14:00,14:15,1,0,R1-1400-A,,
 R1,17:15,17:15,1,-1,,R1-1715-A,
 R2,08:30,08:30,1,0,R2-0830-A,,
 R2,19:00,19:00,1,2,R2-1900-A,,R2-1900-B|R2-1900-C
-
-text
 
 ---
 
@@ -143,8 +133,6 @@ ADD_COST = 120.0 # fixed cost per added bus
 DROP_SAFETY_MARGIN_SEATS = 20 # slack required before dropping
 POP_SIZE = 60 # GA population size
 GENERATIONS = 400 # GA iterations
-
-text
 
 ---
 
@@ -180,9 +168,6 @@ Run on the included test schedules:
 python optimize.py --schedule test_morning_overload.csv
 python optimize.py --schedule test_evening_peak.csv
 python optimize.py --schedule test_mixed_scenarios.csv
-
-text
-
 ---
 
 ## 🎓 Algorithm Details
@@ -223,15 +208,12 @@ const coords = routes.geometry.coordinates.map(([lon, lat]) => ({ latitude: lat,
 <Polyline coordinates={coords} strokeWidth={4} strokeColor="#1976D2" />
 </MapView>
 
-text
-
 ### Option B: GTFS shapes.txt
 If you have GTFS data, read `shapes.txt` to get exact route paths:
 shape_id,shape_pt_lat,shape_pt_lon,shape_pt_sequence
 R1_shape,30.7333,76.7794,1
 R1_shape,30.7412,76.7850,2
 
-text
 
 Then map each route to its shape and render as Polylines on the map for accurate visual representation.
 
@@ -268,3 +250,4 @@ Inspired by GTFS schedule semantics and genetic algorithm approaches to vehicle 
 ---
 
 **⭐ Star this repo if it helps your transit operations!**
+
